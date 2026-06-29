@@ -1,6 +1,6 @@
 # Base UI Components Reference
 
-## All Components (38)
+## All Components (40)
 
 ### Overlay
 - **Dialog** — Modal/popup on top of page
@@ -47,7 +47,7 @@
 
 ### Layout
 - **Separator** — Visual divider
-- **Avatar** — User avatar
+- **Avatar** — User avatar (Root, Image, Fallback)
 - **Button** — Button primitive
 - **Toggle** — Toggle button
 - **ToggleGroup** — Toggle button group
@@ -63,64 +63,83 @@ Dialog.Root → Dialog.Trigger → Dialog.Portal → Dialog.Backdrop
                                                                 → Dialog.Title
                                                                 → Dialog.Description
                                                                 → Dialog.Close
+Dialog.createHandle() — detached trigger support
+Dialog.Handle — handle component
 ```
 
 ### Popover
 ```
 Popover.Root → Popover.Trigger → Popover.Portal → Popover.Backdrop
-                                                → Popover.Positioner → Popover.Popup
-                                                                      → Popover.Arrow
-                                                                      → Popover.Viewport
-                                                                      → Popover.Title
-                                                                      → Popover.Description
-                                                                      → Popover.Close
+                                               → Popover.Positioner → Popover.Popup
+                                                                     → Popover.Arrow
+                                                                     → Popover.Viewport
+                                                                     → Popover.Title
+                                                                     → Popover.Description
+                                                                     → Popover.Close
+Popover.createHandle() — detached trigger support
+Popover.Handle — handle component
 ```
 
 ### Menu
 ```
 Menu.Root → Menu.Trigger → Menu.Portal → Menu.Backdrop
                                        → Menu.Positioner → Menu.Popup
-                                                          → Menu.Arrow
-                                                          → Menu.Item
-                                                          → Menu.LinkItem
-                                                          → Menu.CheckboxItem
-                                                          → Menu.RadioGroup → Menu.RadioItem
-                                                                              → Menu.RadioItemIndicator
-                                                          → Menu.CheckboxItemIndicator
-                                                          → Menu.Group → Menu.GroupLabel
-                                                          → Menu.Separator
-                                                          → Menu.SubmenuRoot → Menu.SubmenuTrigger
-                                                                              → Menu.SubmenuPopup
+                                                         → Menu.Arrow
+                                                         → Menu.Viewport
+                                                         → Menu.Item
+                                                         → Menu.LinkItem
+                                                         → Menu.CheckboxItem
+                                                         → Menu.RadioGroup → Menu.RadioItem
+                                                                            → Menu.RadioItemIndicator
+                                                         → Menu.CheckboxItemIndicator
+                                                         → Menu.Group → Menu.GroupLabel
+                                                         → Menu.Separator
+                                                         → Menu.SubmenuRoot → Menu.SubmenuTrigger
+                                                                             → Menu.SubmenuPopup
+Menu.createHandle() — detached trigger support
+Menu.Handle — handle component
 ```
 
 ### ContextMenu
 ```
-ContextMenu.Root → ContextMenu.Trigger → ContextMenu.Portal → ContextMenu.Backdrop
-                                                            → ContextMenu.Positioner → ContextMenu.Popup
-                                                                                      → ContextMenu.Arrow
-                                                                                      → ContextMenu.Item
-                                                                                      → ContextMenu.LinkItem
-                                                                                      → ContextMenu.Separator
-                                                                                      → ContextMenu.SubmenuRoot → ...
-                                                                                      → ContextMenu.Group → ContextMenu.GroupLabel
-                                                                                      → ContextMenu.RadioGroup → ...
-                                                                                      → ContextMenu.CheckboxItem → ...
+ContextMenu.Root → ContextMenu.Trigger (own)
+                 → ContextMenu.Portal (re-export Menu.Portal)
+                 → ContextMenu.Backdrop (re-export Menu.Backdrop)
+                 → ContextMenu.Positioner (re-export Menu.Positioner)
+                 → ContextMenu.Popup (re-export Menu.Popup)
+                 → ContextMenu.Arrow (re-export Menu.Arrow)
+                 → ContextMenu.Item (re-export Menu.Item)
+                 → ContextMenu.LinkItem (re-export Menu.LinkItem)
+                 → ContextMenu.CheckboxItem (re-export Menu.CheckboxItem)
+                 → ContextMenu.CheckboxItemIndicator (re-export)
+                 → ContextMenu.RadioGroup (re-export Menu.RadioGroup)
+                 → ContextMenu.RadioItem (re-export Menu.RadioItem)
+                 → ContextMenu.RadioItemIndicator (re-export)
+                 → ContextMenu.Group (re-export Menu.Group)
+                 → ContextMenu.GroupLabel (re-export Menu.GroupLabel)
+                 → ContextMenu.SubmenuRoot (re-export)
+                 → ContextMenu.SubmenuTrigger (re-export)
+                 → ContextMenu.Separator (re-export Separator)
 ```
 
 ### Tooltip
 ```
 Tooltip.Provider → Tooltip.Root → Tooltip.Trigger → Tooltip.Portal
-                                                   → Tooltip.Positioner → Tooltip.Popup
-                                                                         → Tooltip.Arrow
-                                                                         → Tooltip.Viewport
+                                                  → Tooltip.Positioner → Tooltip.Popup
+                                                                        → Tooltip.Arrow
+                                                                        → Tooltip.Viewport
+Tooltip.createHandle() — detached trigger support
+Tooltip.Handle — handle component
 ```
 
 ### PreviewCard
 ```
 PreviewCard.Root → PreviewCard.Trigger → PreviewCard.Portal → PreviewCard.Backdrop
-                                                            → PreviewCard.Positioner → PreviewCard.Popup
-                                                                                      → PreviewCard.Arrow
-                                                                                      → PreviewCard.Viewport
+                                                           → PreviewCard.Positioner → PreviewCard.Popup
+                                                                                     → PreviewCard.Arrow
+                                                                                     → PreviewCard.Viewport
+PreviewCard.createHandle() — detached trigger support
+PreviewCard.Handle — handle component
 ```
 
 ### Select
@@ -154,30 +173,41 @@ Combobox.Root → Combobox.Label
                                                      → Combobox.Arrow
                                                      → Combobox.Status
                                                      → Combobox.Empty
+                                                     → Combobox.Collection
                                                      → Combobox.List → Combobox.Row → Combobox.Item
                                                                                      → Combobox.ItemText
                                                                                      → Combobox.ItemIndicator
-                                                     → Combobox.Separator
+                                                     → Combobox.Separator (re-export)
                                                      → Combobox.Group → Combobox.GroupLabel
+Combobox.useFilter — filtering hook
+Combobox.useFilteredItems — filtered items hook
 ```
 
 ### Autocomplete
 ```
-Autocomplete.Root → Autocomplete.InputGroup → Autocomplete.Input
-                                             → Autocomplete.Trigger
-                                             → Autocomplete.Icon
-                                             → Autocomplete.Clear
-                                             → Autocomplete.Value
-                   → Autocomplete.Portal → Autocomplete.Backdrop
-                                         → Autocomplete.Positioner → Autocomplete.Popup
-                                                                   → Autocomplete.Arrow
-                                                                   → Autocomplete.Status
-                                                                   → Autocomplete.Empty
-                                                                   → Autocomplete.List → Autocomplete.Row → Autocomplete.Item
-                                                                                                            → Autocomplete.ItemText
-                                                                                                            → Autocomplete.ItemIndicator
-                                                                   → Autocomplete.Separator
-                                                                   → Autocomplete.Group → Autocomplete.GroupLabel
+Autocomplete.Root (own)
+Autocomplete.Value (own)
+Autocomplete.Trigger (own)
+Autocomplete.InputGroup (own)
+              → Autocomplete.Input (re-export Combobox.Input)
+              → Autocomplete.Icon (re-export Combobox.Icon)
+              → Autocomplete.Clear (re-export Combobox.Clear)
+              → Autocomplete.Chips → Autocomplete.Chip → Autocomplete.ChipRemove (re-export)
+                   → Autocomplete.Portal (re-export Combobox.Portal)
+                   → Autocomplete.Backdrop (re-export Combobox.Backdrop)
+                   → Autocomplete.Positioner (re-export Combobox.Positioner)
+                   → Autocomplete.Popup (re-export Combobox.Popup)
+                                         → Autocomplete.Arrow (re-export Combobox.Arrow)
+                                         → Autocomplete.Status (re-export Combobox.Status)
+                                         → Autocomplete.Empty (re-export Combobox.Empty)
+                                         → Autocomplete.Collection (re-export Combobox.Collection)
+                                         → Autocomplete.List → Autocomplete.Row → Autocomplete.Item (own)
+                                                                                  → Autocomplete.ItemText (re-export)
+                                                                                  → Autocomplete.ItemIndicator (re-export)
+                                         → Autocomplete.Separator (re-export)
+                                         → Autocomplete.Group → Autocomplete.GroupLabel (re-export)
+Autocomplete.useFilter — filtering hook
+Autocomplete.useFilteredItems — filtered items hook
 ```
 
 ### Tabs
@@ -274,12 +304,11 @@ ScrollArea.Root → ScrollArea.Viewport → ScrollArea.Content
 
 ### Toast
 ```
-Toast.Provider → Toast.Portal → Toast.Viewport → Toast.Root → Toast.Content
-                                                            → Toast.Positioner → Toast.Root → Toast.Arrow
-                (or stacked)                      → Toast.Title
-                                                  → Toast.Description
-                                                  → Toast.Action
-                                                  → Toast.Close
+Toast.Provider → Toast.Portal → Toast.Viewport → Toast.Root → Toast.Content → Toast.Title
+                                                                            → Toast.Description
+                                                                            → Toast.Action
+                                                                            → Toast.Close
+                                                 → Toast.Positioner → Toast.Arrow
 ```
 
 ### Drawer
@@ -294,6 +323,8 @@ Drawer.Provider → Drawer.IndentBackground
                                                                                   → Drawer.Description
                                                                                   → Drawer.Close
                → Drawer.VirtualKeyboardProvider
+Drawer.createHandle() — detached trigger support (re-export Dialog.createHandle)
+Drawer.Handle — handle component (re-export Dialog.Handle)
 ```
 
 ### NavigationMenu
@@ -319,6 +350,12 @@ Toolbar.Root → Toolbar.Button
              → Toolbar.Separator
              → Toolbar.Group → Toolbar.Button (multiple)
              → Toolbar.Input
+```
+
+### Avatar
+```
+Avatar.Root → Avatar.Image
+            → Avatar.Fallback
 ```
 
 ### Single-Part Components
